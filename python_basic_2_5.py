@@ -18,9 +18,18 @@ def generate_words(n=20):
     for _ in range(n):
         word = ''.join(random.choices(string.ascii_lowercase, k=random.randint(3, 10)))
         words.append(word)
+    print(words)
+    verso=(words[::-1])
+    print(verso)
 
-    return words
+    with open("file1.txt", "w", encoding="utf8") as output_file:
+        for word in words:
+                output_file.write(f"{word}\n")
 
-    """no i nie wiem jaka jest podchytliwosc w kodowaniu :)
-    print(content[::-1]) a jak to w plik wrzucić? 
-    dla stringa uzyc join?! <thinking>
+    #odwrócona kolejność
+    with open("file2.txt","w",encoding="cp1252") as output_2:
+        for word in verso:
+            output_2.write(f"{word} ,")
+
+
+generate_words(3)
