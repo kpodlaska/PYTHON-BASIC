@@ -20,4 +20,4 @@ while readable_file!="koniec":
         print(result)
     with open("result.txt", 'w') as output_file:
         for line in result:
-            output_file.write(f"{line}\n")
+            output_file.write(f"czesc {line}")
