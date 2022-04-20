@@ -13,9 +13,25 @@ Examples:
     user enters: hello, world, foo, bar, baz
     >>> read_numbers(5)
     No numbers entered
-
 """
 
+def read_numbers(n: int) -> str:
+    readed_numbers=[]
+    real_numbers=[]
+    i = 0
+    while len(readed_numbers)<n:
+        zmienna=input("Wpisz liczbe  ")
+        readed_numbers.append(zmienna)
+        if zmienna.isdigit()==True:
+            real_numbers.append(int(zmienna))
+    if len(real_numbers) == 0:
+        result="użytkownik nie wpisał niczego co byłoby liczbą dodatnią"
+    else:
+        result=str(round(sum(real_numbers)/len(real_numbers),2))
+
+    print(result)
+
+read_numbers(5)
 
 def read_numbers(n: int) -> str:
     ...
