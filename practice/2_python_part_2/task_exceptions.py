@@ -17,5 +17,38 @@ In all cases it should print "Division finished"
 import typing
 
 
+def division(x: int, y: int) -> typing.Union[None, int]: #użyć dekoratora?!
+
+    try:
+        result = float(x / y)
+        print("Deletion finished")
+        print(result)
+        if y == 1:
+            raise ValueError("Deletion on 1 get the same result")
+    except  TypeError:
+            print("Deletion finished")
+            print("Podano nieprawidłową wartość")
+    except ZeroDivisionError:
+            print("Deletion finished")
+            print("Division by 0")
+    except ValueError as blad:
+            print(blad)
+
+
+
+
+
+division(1, 0)
+print("*"*20) #ozdobniki wylacznie dla funu
+division(1, 1)
+print("-"*20)
+division(2, "bulka")
+print("."*20)
+division(1,4)
+division(10,1)
+print("#"*20)
+division("zero",7)
+print("!"*20)
+division(121,11)
 def division(x: int, y: int) -> typing.Union[None, int]:
     ...
