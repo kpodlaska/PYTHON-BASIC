@@ -1,4 +1,4 @@
-"""
+""""
 Create 3 classes with interconnection between them (Student, Teacher,
 Homework)
 Use datetime module for working with date/time
@@ -25,19 +25,39 @@ Methods:
     Note that this method doesn't need object itself
 PEP8 comply strictly.
 """
-import datetime
+from datetime import date, timedelta, datetime
 
 
 class Teacher:
-    ...
+    def __init__(self, last_name: str, first_name: str):
+        self.last_name = last_name
+        self.first_name = first_name
+
+    def create_homework(self, text, deadline, created):
+        pass
 
 
 class Student:
-    ...
+    def __init__(self, last_name: str, first_name: str):
+        self.last_name = last_name
+        self.first_name = first_name
+
+    def do_homework(self, homework):
+        if homework.is_active == False:
+            return "Too late"
+        return "Zrobiłem zadanie"
 
 
 class Homework:
-    ...
+    def __init__(self, text, deadline, created):
+        self.text = text
+        self.deadline = deadline
+        self.created = created
+
+    def is_active(self, homework):
+        if deadline <= 0:
+            return False
+        return True
 
 
 if __name__ == '__main__':
@@ -46,14 +66,14 @@ if __name__ == '__main__':
     teacher.last_name  # Daniil
     student.first_name  # Petrov
 
-    expired_homework = teacher.create_homework('Learn functions', 0)
-    expired_homework.created  # Example: 2019-05-26 16:44:30.688762
+    expired_homework = teacher.create_homework('Learn functions', timedelta(days = 0) ,datetime(2019,3,19))
+    expired_homework.created  # Example: 2019-05-26 16:44:30.688762 #wywala błąd "noneType" object has no attribute "created"
     expired_homework.deadline  # 0:00:00
     expired_homework.text  # 'Learn functions'
 
     # create function from method and use it
     create_homework_too = teacher.create_homework
-    oop_homework = create_homework_too('create 2 simple classes', 5)
+    oop_homework = create_homework_too('create 2 simple classes', timedelta(days=5), datetime(2019,4,5))
     oop_homework.deadline  # 5 days, 0:00:00
 
     student.do_homework(oop_homework)
