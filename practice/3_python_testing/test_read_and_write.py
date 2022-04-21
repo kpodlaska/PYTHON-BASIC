@@ -10,12 +10,15 @@ Example:
 """
 
 
-def generate_words():
-    import string
-    import random
-    words=list()
-    pomocnicza = list("siedem","cztery","dwa","pieski","droga","brzoza")
-    words.append(pomocnicza)
+def generate_files():
+    words=[]
+    with open("input_file.txt") as input_file:
+        for line in input_file:
+            content=line.strip()
+            words.append(content)
+
+    print(words)
+
     verso=(words[::-1])
     print(verso)
 
@@ -26,7 +29,6 @@ def generate_words():
     #odwrócona kolejność
     with open("test_file_2.txt","w",encoding="cp1252") as output_2:
         for word in verso:
-            output_2.write(f"{word} ,")
+            output_2.write(f"{word}, ")
 
-
-generate_words()
+generate_files()
