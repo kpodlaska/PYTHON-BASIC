@@ -45,18 +45,21 @@ def current_date():
 
 
 def calculate_days(from_date):
-    s_date=convert(from_date) #start date
-    f_date=current_date() #current date aka finish date
+    try:
+        s_date=convert(from_date) #start date
+        f_date=current_date() #current date aka finish date
 
 
-    delta = f_date - s_date
-    print(f"Pomiędzy datami było {delta.days} dni")
+        delta = f_date - s_date
+        print(f"Pomiędzy datami {s_date} oraz {f_date} (dzisiaj) było {delta.days} dni")
+    except ValueError:
+        print(f"WrongFormatException dla {from_date} powinno byc dd-mm-yyyy z uzyciem dowolnych ciapkow")
 
 
 convert("01-03-2020")
 current_date()
 calculate_days("22-03-2020")
-#calculate_days("2020-03-23")
+calculate_days("2020-03-23")
 
 
 """
