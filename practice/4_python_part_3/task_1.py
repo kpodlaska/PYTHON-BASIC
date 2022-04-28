@@ -42,6 +42,8 @@ def current_date():
     return today
     #print("Today's date:", today)
 
+def test_current_date():
+    assert date.today() == date(2022, 4, 28)
 
 
 def calculate_days(from_date):
@@ -59,6 +61,7 @@ def calculate_days(from_date):
 convert("01-03-2020")
 current_date()
 calculate_days("22-03-2020")
+calculate_days("22-03-2024")
 calculate_days("2020-03-23")
 
 
