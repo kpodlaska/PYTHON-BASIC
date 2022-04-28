@@ -13,7 +13,24 @@ import math
 
 
 def math_calculate(function: str, *args):
-    ...
+
+    if function=="log":
+        result=len(list(args)) #sprawdza ilosc argumentow
+        math_result=math.log(args[0],args[1])
+        print(result)
+        print(math_result)
+    elif function=="ceil":
+        result=len(list(args))
+        math_result=math.ceil(args[0])
+        print(result)
+        print(math_result)
+    else:
+         print("nie ma takiej funkcji")
+math_calculate("log", 1024 , 2)
+math_calculate('ceil', 10.7)
+
+
+
 
 
 """
