@@ -13,7 +13,20 @@ import re
 
 
 def is_http_domain(domain: str) -> bool:
-    ...
+    pattern_to_search=re.compile(r'http')
+    matches=pattern_to_search.finditer(domain)
+    result=[]
+    for match in matches:
+        result.append(match)
+
+    if len(result)==0:
+        print(f'False. domena {domain} NIE zawiera http')
+    else:
+        print(f'True. domenta {domain} zawiera http')
+
+
+is_http_domain('griddynamics.com')
+is_http_domain('https://ru.wikipedia.org/')
 
 
 """
