@@ -17,8 +17,12 @@ Example:
 import argparse
 
 
+
 def print_name_address(args: argparse.Namespace) -> None:
-    ...
+    #creating fake address
+    #random number + space + field from dict - download readable file with US zip codes or something ;)
+    #then prepare recipe for building fake address
+
 
 
 """
