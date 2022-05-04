@@ -15,36 +15,30 @@ Example:
 """
 
 import argparse
+from faker import Faker
 fake = Faker()
-"""generate some names"""
-how_many_fake_addresses = 10
+parser = argparse.ArgumentParser()
+parser.add_argument("-f","--fake",type=int)
+args = parser.parse_args()
+
 def create_fake(how_many_fake_addresses):
-    for _ in range(how_many_fake_addresses):
+    for _ in range(int(how_many_fake_addresses)):
          fake_personal_data= {}
          fake_personal_data["some_name"]=fake.name()
          fake_personal_data["fake_address"]=fake.address()
          print(fake_personal_data)
 
-create_fake(19)
 
-
-"""def print_name_address(args: argparse.Namespace) -> None:
-    #creating fake address
-    #random number + space + field from dict - download readable file with US zip codes or something ;)
-    #then prepare recipe for building fake address
-    person=[some_name]
-    fake_address=random.randrange(1,999)+' '+random.choice(fake_street_names)+" "+random.choice(fake_cities_names)
-    print(fake_address)
-    person.append(fake_address)
-    print(person)
-
-if __name__=="__main__":
-    print(print_name_address)
+if __name__=='__main__':
+    print("START")
+    print(create_fake(args.fake))
+    print("END")
 
 
 
 
-""""""
+
+"""
 Write test for print_name_address function
 Use Mock for mocking args argument https://docs.python.org/3/library/unittest.mock.html#unittest.mock.Mock
 Example:
