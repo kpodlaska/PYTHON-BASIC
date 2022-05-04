@@ -9,16 +9,16 @@ from typing import Tuple
 import requests
 
 #def make_request(url: str) -> Tuple[int, str]:
-URL='https://www.google.com'
-resp=requests.get(URL)
+#def make_request(url):
+url='https://www.google.com'
+resp=requests.get(url)
 response=(resp.text[:1000])
 status_code=resp.status_code
 result:Tuple[int,str]=(status_code,response)
 print(result)
-print(status_code,response)
-print(response)
+   # return result
 
-#make_request("http://wwww.google.com")
+#make_request('http://wwww.google.com')
 
 
 """
