@@ -8,20 +8,13 @@ Examples:
 from typing import Tuple
 import requests
 
-#def make_request(url: str) -> Tuple[int, str]:
-#def make_request(url):
-"""url='https://www.google.com'
-resp=requests.get(url)
-response=(resp.text[:1000])
-status_code=resp.status_code
-result:Tuple[int,str]=(status_code,response)
-print(result)"""
 
-def make_request(url):
+
+def make_request(url: str) -> Tuple[int, str]:
     resp=requests.get(url)
     response=resp.text[:1000]
     status_code = resp.status_code
-    result=[status_code,response]
+    result:Tuple[int,str]=(status_code,response)
     print(result)
     return response
 
