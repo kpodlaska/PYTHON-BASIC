@@ -6,10 +6,19 @@ Examples:
      200, 'response data'
 """
 from typing import Tuple
+import requests
 
+#def make_request(url: str) -> Tuple[int, str]:
+URL='https://www.google.com'
+resp=requests.get(URL)
+response=(resp.text[:1000])
+status_code=resp.status_code
+result:Tuple[int,str]=(status_code,response)
+print(result)
+print(status_code,response)
+print(response)
 
-def make_request(url: str) -> Tuple[int, str]:
-    ...
+#make_request("http://wwww.google.com")
 
 
 """
