@@ -27,6 +27,7 @@ def create_fake(how_many_fake_addresses):
          fake_personal_data["some_name"]=fake.name()
          fake_personal_data["fake_address"]=fake.address()
          print(fake_personal_data)
+    return fake_personal_data
 
 
 if __name__=='__main__':
