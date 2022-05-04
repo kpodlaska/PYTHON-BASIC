@@ -10,15 +10,26 @@ import requests
 
 #def make_request(url: str) -> Tuple[int, str]:
 #def make_request(url):
-url='https://www.google.com'
+"""url='https://www.google.com'
 resp=requests.get(url)
 response=(resp.text[:1000])
 status_code=resp.status_code
 result:Tuple[int,str]=(status_code,response)
-print(result)
-   # return result
+print(result)"""
 
-#make_request('http://wwww.google.com')
+def make_request(url):
+    resp=requests.get(url)
+    response=resp.text[:1000]
+    status_code = resp.status_code
+    result=[status_code,response]
+    print(result)
+    return response
+
+
+make_request('https://www.google.com')
+
+
+
 
 
 """
