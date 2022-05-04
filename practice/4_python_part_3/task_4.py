@@ -15,11 +15,18 @@ Example:
 """
 
 import argparse
-from faker import Faker
 fake = Faker()
 """generate some names"""
-for _ in range(number_of_fakes):
-    print(fake.name(),fake.address())
+how_many_fake_addresses = 10
+def create_fake(how_many_fake_addresses):
+    for _ in range(how_many_fake_addresses):
+         fake_personal_data= {}
+         fake_personal_data["some_name"]=fake.name()
+         fake_personal_data["fake_address"]=fake.address()
+         print(fake_personal_data)
+
+create_fake(19)
+
 
 """def print_name_address(args: argparse.Namespace) -> None:
     #creating fake address
@@ -37,7 +44,7 @@ if __name__=="__main__":
 
 
 
-"""
+""""""
 Write test for print_name_address function
 Use Mock for mocking args argument https://docs.python.org/3/library/unittest.mock.html#unittest.mock.Mock
 Example:
