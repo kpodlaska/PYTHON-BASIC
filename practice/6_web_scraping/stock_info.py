@@ -37,7 +37,33 @@ from requests import get
 URL = 'https://finance.yahoo.com/most-active'
 page = get(URL)
 bs=BeautifulSoup(page.content,'html.parser')
-#print(bs)
 
+title_=" 5 stocks with most youngest CEOs "
+n="Name"
+c="Code"
+cntry="County"
+empl="Employees"
+ceo="CEO NAME"
+ceo_yb="CEO Year Born"
+header=(f'|{n:40}|{c:8}|{cntry:20}|{empl:16}|{ceo:30}|{ceo_yb:16}|')
+how_many_stars=int(len(header)-len(title_)-2)/2
+
+print("=" * int(how_many_stars), title_ , "=" * int(how_many_stars))
+print(header)
+print("-"*len(header))
 for company in bs.find_all('a', class_="Fw(600) C($linkColor)"):
-    print(company)
+    company_code=company.get_text()
+    company_name=company.get("title")
+    company_link_profile='https://finance.yahoo.com'+"/quote/"+company_code+"/profile?p="+company_code
+    """stąd pobierzemy nazwe CEO, liczbe pracownikow, kraj i kraj urodzenia"""
+    company_link_key_statistics='https://finance.yahoo.com'+"/quote/"+company_code+"/key-statistics?p="+company_code
+    #print(company_link_profile)
+    #print(company_link_key_statistics)
+
+
+    #bs_=BeautifulSoup(company_page_profile.content)
+    #print(bs_)
+    #for offer in bs_.find_all('p'):
+    #    print(offer)
+
+    print(f"|{company_name:40}| {company_code:8}|{company_code:20}|{company_code:16}|{company_code:30}|{company_code:16}|")
