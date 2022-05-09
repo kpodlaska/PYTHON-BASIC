@@ -37,4 +37,7 @@ from requests import get
 URL = 'https://finance.yahoo.com/most-active'
 page = get(URL)
 bs=BeautifulSoup(page.content,'html.parser')
-print(bs)
+#print(bs)
+
+for company in bs.find_all('a', class_="Fw(600) C($linkColor)"):
+    print(company)
