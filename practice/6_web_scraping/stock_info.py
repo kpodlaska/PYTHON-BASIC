@@ -32,3 +32,9 @@ Links:
     - lxml docs: https://lxml.de/
 """
 
+from bs4 import BeautifulSoup
+from requests import get
+URL = 'https://finance.yahoo.com/most-active'
+page = get(URL)
+bs=BeautifulSoup(page.content,'html.parser')
+print(bs)
