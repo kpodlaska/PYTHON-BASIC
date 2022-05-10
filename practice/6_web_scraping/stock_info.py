@@ -35,24 +35,43 @@ Links:
 from bs4 import BeautifulSoup
 from requests import get
 
+def cooking_soup_1():
+    URL = 'https://finance.yahoo.com/most-active'
+    page = get(URL)
+    bs=BeautifulSoup(page.content,'html.parser')
+    return bs
 
-URL = 'https://finance.yahoo.com/most-active'
-page = get(URL)
-bs=BeautifulSoup(page.content,'html.parser')
+def get_company_code():
+    for company in bs.find_all('a', class_="Fw(600) C($linkColor)"):
+        company_code = company.get_text()
+    #dokonczyc - trzeba stworzyc slownik gdzies wyzej
 
-title_=" 5 stocks with most youngest CEOs "
-n="Name"
-c="Code"
-cntry="County"
-empl="Employees"
-ceo="CEO NAME"
-ceo_yb="CEO Year Born"
-header=(f'|{n:40}|{c:8}|{cntry:20}|{empl:16}|{ceo:30}|{ceo_yb:16}|')
-how_many_stars=int(len(header)-len(title_)-2)/2
+def count_stars_of_title(header,title_):
+    how_many_stars = int(len(header) - len(title_) - 2) / 2
+    return how_many_stars
 
-print("=" * int(how_many_stars), title_ , "=" * int(how_many_stars))
-print(header)
-print("-"*len(header))
+def print_title_of_table():
+    title_ = " 5 stocks with most youngest CEOs "
+    return title_
+
+def print_header():
+    how_many_stars=count_stars_of_title(lets_build_header(),print_title_of_table())
+    title=print_title_of_table()
+    print("=" * int(how_many_stars), title, "=" * int(how_many_stars))
+
+def lets_build_header():
+    n="Name"
+    c="Code"
+    cntry="County"
+    empl="Employees"
+    ceo="CEO NAME"
+    ceo_yb="CEO Year Born"
+    header=(f'|{n:40}|{c:8}|{cntry:20}|{empl:16}|{ceo:30}|{ceo_yb:16}|')
+
+    return header
+
+
+
 for company in bs.find_all('a', class_="Fw(600) C($linkColor)"):
     company_code=company.get_text()
     company_name=company.get("title")
@@ -63,13 +82,23 @@ for company in bs.find_all('a', class_="Fw(600) C($linkColor)"):
     #print(company_link_profile)
     #print(company_link_key_statistics)
     soup=BeautifulSoup(company_page_profile.content, "html.parser")
-    country=soup.find_all('div', class_="Mb(25px)")
-    print(country)
+    footer=soup.find('div', class_="Mb(25px)")
+    country=footer.find('p', class_="D(ib) W(47.727%) Pend(40px)").get_text("_").split("_")[-3]
+    #print(footer)
+    more_details=footer.find_all("span",class_="Fw(600)")
+    employes=more_details[-1].get_text()
 
-    "szukamy kraju na stronie company_link_profile"
-    """a moze z api"""
+
+def main():
+    print_header()
+    h=lets_build_header()
+    print(h)
+    print("-"*len(h))
 
 
-    """nie dziala dostaje komunikat message-1">Thank you for your patience."""
+if __name__ == "__main__":
+    main()
 
-    print(f"|{company_name:40}| {company_code:8}|{company_code:20}|{company_code:16}|{company_code:30}|{company_code:16}|")
+
+
+#print(f"|{company_name:40}| {company_code:8}|{country:20}|{company_code:16}|{company_code:30}|{company_code:16}|")
