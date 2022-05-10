@@ -34,6 +34,8 @@ Links:
 
 from bs4 import BeautifulSoup
 from requests import get
+
+
 URL = 'https://finance.yahoo.com/most-active'
 page = get(URL)
 bs=BeautifulSoup(page.content,'html.parser')
@@ -57,13 +59,17 @@ for company in bs.find_all('a', class_="Fw(600) C($linkColor)"):
     company_link_profile='https://finance.yahoo.com'+"/quote/"+company_code+"/profile?p="+company_code
     """stąd pobierzemy nazwe CEO, liczbe pracownikow, kraj i kraj urodzenia"""
     company_link_key_statistics='https://finance.yahoo.com'+"/quote/"+company_code+"/key-statistics?p="+company_code
+    company_page_profile=get(company_link_profile, headers={'User-Agent': 'PostmanRuntime/7.29.0'})
     #print(company_link_profile)
     #print(company_link_key_statistics)
+    soup=BeautifulSoup(company_page_profile.content, "html.parser")
+    country=soup.find_all('div', class_="Mb(25px)")
+    print(country)
+
+    "szukamy kraju na stronie company_link_profile"
+    """a moze z api"""
 
 
-    #bs_=BeautifulSoup(company_page_profile.content)
-    #print(bs_)
-    #for offer in bs_.find_all('p'):
-    #    print(offer)
+    """nie dziala dostaje komunikat message-1">Thank you for your patience."""
 
     print(f"|{company_name:40}| {company_code:8}|{company_code:20}|{company_code:16}|{company_code:30}|{company_code:16}|")
