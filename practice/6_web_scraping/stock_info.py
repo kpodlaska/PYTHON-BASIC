@@ -78,6 +78,26 @@ def get_page_to_get_W52_details():
         comp_key_statistics.append(company_link_ks)
     return comp_key_statistics
 
+def get_country():
+    countries=list()
+    urls=get_page_to_get_country_and_CEO_details()
+    for url in urls:
+        page=get(url,headers={'User-Agent': 'PostmanRuntime/7.29.0'})
+        soup = BeautifulSoup(page.content, "html.parser")
+        #print(soup)
+    for company in soup.find_all():
+        footer = company.find('div', class_="Mb(25px)")
+        country = footer.find('p', class_="D(ib) W(47.727%) Pend(40px)").get_text("_").split("_")[-3]
+            #print(country)
+            # print(footer)
+            #more_details = footer.find_all("span", class_="Fw(600)")
+            #employes = more_details[-1].get_text()
+        countries.append(country)
+        return countries
+
+
+
+
 
 def count_stars_of_title(header,title_):
     how_many_stars = int(len(header) - len(title_) - 2) / 2
@@ -136,6 +156,8 @@ def main():
     get_company_name()
     print(get_page_to_get_country_and_CEO_details())
     print(get_page_to_get_W52_details())
+    print(get_country())
+
 
 
 if __name__ == "__main__":
