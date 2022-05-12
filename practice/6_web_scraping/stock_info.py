@@ -42,8 +42,15 @@ def cooking_soup_1():
     return bs
 
 def get_company_code():
+    companies=list()
+    bs=cooking_soup_1()
     for company in bs.find_all('a', class_="Fw(600) C($linkColor)"):
-        company_code = company.get_text()
+        company_code = {company.get_text()}
+        companies.append(company_code)
+        print(company_code)
+    print(companies)
+
+    return company_code
     #dokonczyc - trzeba stworzyc slownik gdzies wyzej
 
 def count_stars_of_title(header,title_):
@@ -55,9 +62,11 @@ def print_title_of_table():
     return title_
 
 def print_header():
-    how_many_stars=count_stars_of_title(lets_build_header(),print_title_of_table())
+    head=lets_build_header()
     title=print_title_of_table()
-    print("=" * int(how_many_stars), title, "=" * int(how_many_stars))
+    x=count_stars_of_title(head,title)+1
+    deco_header="=" * int(x) +title+ "=" * int(x)
+    return deco_header
 
 def lets_build_header():
     n="Name"
@@ -70,13 +79,19 @@ def lets_build_header():
 
     return header
 
+def create_table():
+    print(print_header())
+    print(lets_build_header())
+    print("-"*len(lets_build_header()))
+    return None
 
 
-for company in bs.find_all('a', class_="Fw(600) C($linkColor)"):
+
+"""for company in bs.find_all('a', class_="Fw(600) C($linkColor)"):
     company_code=company.get_text()
     company_name=company.get("title")
-    company_link_profile='https://finance.yahoo.com'+"/quote/"+company_code+"/profile?p="+company_code
-    """stąd pobierzemy nazwe CEO, liczbe pracownikow, kraj i kraj urodzenia"""
+    company_link_profile='https://finance.yahoo.com'+"/quote/"+company_code+"/profile?p="+company_code"""
+"""stąd pobierzemy nazwe CEO, liczbe pracownikow, kraj i kraj urodzenia
     company_link_key_statistics='https://finance.yahoo.com'+"/quote/"+company_code+"/key-statistics?p="+company_code
     company_page_profile=get(company_link_profile, headers={'User-Agent': 'PostmanRuntime/7.29.0'})
     #print(company_link_profile)
@@ -86,14 +101,12 @@ for company in bs.find_all('a', class_="Fw(600) C($linkColor)"):
     country=footer.find('p', class_="D(ib) W(47.727%) Pend(40px)").get_text("_").split("_")[-3]
     #print(footer)
     more_details=footer.find_all("span",class_="Fw(600)")
-    employes=more_details[-1].get_text()
+    employes=more_details[-1].get_text()"""
 
 
 def main():
-    print_header()
-    h=lets_build_header()
-    print(h)
-    print("-"*len(h))
+    create_table()
+    get_company_code()
 
 
 if __name__ == "__main__":
