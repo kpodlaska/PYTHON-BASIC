@@ -98,7 +98,7 @@ def get_empl_number():
         page=get(i,headers={'User-Agent': 'PostmanRuntime/7.29.0'})
         soup = BeautifulSoup(page.content, "html.parser")
         empl=soup.find('div', class_="Mb(25px)")
-        country = empl.find('p', class_="D(ib) Va(t)")
+        country = empl.find('p', class_="D(ib) Va(t)").get_text("_").replace(",","").replace(" ","").split("_")[-1].replace(":","no data")
         #print(footer)
         print(country)
         #employ_numbers.append(number_of_employees)
