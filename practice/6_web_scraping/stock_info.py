@@ -45,13 +45,39 @@ def get_company_code():
     companies=list()
     bs=cooking_soup_1()
     for company in bs.find_all('a', class_="Fw(600) C($linkColor)"):
-        company_code = {company.get_text()}
+        company_code = company.get_text()
         companies.append(company_code)
-        print(company_code)
+        #print(company_code)
     print(companies)
 
-    return company_code
-    #dokonczyc - trzeba stworzyc slownik gdzies wyzej
+
+def get_company_name():
+    companies_names=list()
+    bs=cooking_soup_1()
+    for company in bs.find_all('a', class_="Fw(600) C($linkColor)"):
+        company_name = company.get("title")
+        companies_names.append(company_name)
+    print(companies_names)
+    return companies_names
+
+def get_page_to_get_country_and_CEO_details():
+    comp_link_profiles=list()
+    bs=cooking_soup_1()
+    for company in bs.find_all('a', class_="Fw(600) C($linkColor)"):
+        company_code = company.get_text()
+        company_link_profile = 'https://finance.yahoo.com' + "/quote/" + company_code + "/profile?p=" + company_code
+        comp_link_profiles.append(company_link_profile)
+    return comp_link_profiles
+
+def get_page_to_get_W52_details():
+    comp_key_statistics=list()
+    bs=cooking_soup_1()
+    for company in bs.find_all('a', class_="Fw(600) C($linkColor)"):
+        company_code = company.get_text()
+        company_link_ks ='https://finance.yahoo.com' + "/quote/" + company_code + "/key-statistics?p=" + company_code
+        comp_key_statistics.append(company_link_ks)
+    return comp_key_statistics
+
 
 def count_stars_of_title(header,title_):
     how_many_stars = int(len(header) - len(title_) - 2) / 2
@@ -107,6 +133,9 @@ def create_table():
 def main():
     create_table()
     get_company_code()
+    get_company_name()
+    print(get_page_to_get_country_and_CEO_details())
+    print(get_page_to_get_W52_details())
 
 
 if __name__ == "__main__":
