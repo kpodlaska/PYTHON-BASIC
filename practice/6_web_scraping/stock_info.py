@@ -80,20 +80,16 @@ def get_page_to_get_W52_details():
 
 def get_country():
     countries=list()
-    urls=get_page_to_get_country_and_CEO_details()
-    for url in urls:
-        page=get(url,headers={'User-Agent': 'PostmanRuntime/7.29.0'})
+    urls = get_page_to_get_country_and_CEO_details()
+    for i in urls:
+        page=get(i,headers={'User-Agent': 'PostmanRuntime/7.29.0'})
         soup = BeautifulSoup(page.content, "html.parser")
-        #print(soup)
-    for company in soup.find_all():
-        footer = company.find('div', class_="Mb(25px)")
-        country = footer.find('p', class_="D(ib) W(47.727%) Pend(40px)").get_text("_").split("_")[-3]
-            #print(country)
-            # print(footer)
-            #more_details = footer.find_all("span", class_="Fw(600)")
-            #employes = more_details[-1].get_text()
+        company=soup.find('div', class_="Mb(25px)")
+        country = company.find('p', class_="D(ib) W(47.727%) Pend(40px)").get_text("_").split("_")[-3].split(",")[0]
+        #print(footer)
+        #print(country)
         countries.append(country)
-        return countries
+    return countries
 
 
 
