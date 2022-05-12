@@ -91,6 +91,19 @@ def get_country():
         countries.append(country)
     return countries
 
+def get_empl_number():
+    employ_numbers=list()
+    urls = get_page_to_get_country_and_CEO_details()
+    for i in urls:
+        page=get(i,headers={'User-Agent': 'PostmanRuntime/7.29.0'})
+        soup = BeautifulSoup(page.content, "html.parser")
+        empl=soup.find('div', class_="Mb(25px)")
+        country = empl.find('p', class_="D(ib) Va(t)")
+        #print(footer)
+        print(country)
+        #employ_numbers.append(number_of_employees)
+
+
 
 
 
@@ -153,7 +166,7 @@ def main():
     print(get_page_to_get_country_and_CEO_details())
     print(get_page_to_get_W52_details())
     print(get_country())
-
+    get_empl_number()
 
 
 if __name__ == "__main__":
