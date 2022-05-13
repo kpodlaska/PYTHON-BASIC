@@ -108,10 +108,11 @@ def get_CEO_name():
     for i in urls:
         page=get(i,headers={'User-Agent': 'PostmanRuntime/7.29.0'})
         soup = BeautifulSoup(page.content, "html.parser")
-        ceo_soup=soup.find("table", class_="W(100%)").get_text("_").split("_")
+        ceo_name=soup.find("table", class_="W(100%)").get_text("_").split("_")[5]
         #ceo_table=ceo_soup.find_all("tr", class_="C($primaryColor) BdB Bdc($seperatorColor) H(36px)")
-        print(ceo_soup)
-        print(len(ceo_soup))
+
+    return ceo_s
+
 
         #------
         #item = soup.select("div span[data-reactid*='$11606747']")[0].text
@@ -192,7 +193,7 @@ def main():
     #print(get_page_to_get_W52_details())
     #print(get_country())
     #print(get_empl_number())
-    get_CEO_name()
+    print(get_CEO_name())
 
 if __name__ == "__main__":
     main()
