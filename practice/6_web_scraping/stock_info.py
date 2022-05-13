@@ -86,8 +86,6 @@ def get_country():
         soup = BeautifulSoup(page.content, "html.parser")
         company=soup.find('div', class_="Mb(25px)")
         country = company.find('p', class_="D(ib) W(47.727%) Pend(40px)").get_text("_").split("_")[-3].split(",")[0]
-        #print(footer)
-        #print(country)
         countries.append(country)
     return countries
 
@@ -98,10 +96,10 @@ def get_empl_number():
         page=get(i,headers={'User-Agent': 'PostmanRuntime/7.29.0'})
         soup = BeautifulSoup(page.content, "html.parser")
         empl=soup.find('div', class_="Mb(25px)")
-        country = empl.find('p', class_="D(ib) Va(t)").get_text("_").replace(",","").replace(" ","").split("_")[-1].replace(":","no data")
-        #print(footer)
-        print(country)
-        #employ_numbers.append(number_of_employees)
+        country = empl.find('p', class_="D(ib) Va(t)").get_text("_").replace(",","").replace(" ","").split("_")[-1].replace(":\xa0","-")
+        #print(country)
+        employ_numbers.append(country)
+    return employ_numbers
 
 
 
@@ -166,7 +164,7 @@ def main():
     print(get_page_to_get_country_and_CEO_details())
     print(get_page_to_get_W52_details())
     print(get_country())
-    get_empl_number()
+    print(get_empl_number())
 
 
 if __name__ == "__main__":
