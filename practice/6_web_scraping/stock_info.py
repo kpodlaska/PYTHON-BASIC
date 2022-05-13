@@ -34,6 +34,7 @@ Links:
 
 from bs4 import BeautifulSoup
 from requests import get
+import re
 
 def cooking_soup_1():
     URL = 'https://finance.yahoo.com/most-active'
@@ -101,6 +102,32 @@ def get_empl_number():
         employ_numbers.append(country)
     return employ_numbers
 
+def get_CEO_name():
+    ceo_s=list()
+    urls = get_page_to_get_country_and_CEO_details()
+    for i in urls:
+        page=get(i,headers={'User-Agent': 'PostmanRuntime/7.29.0'})
+        soup = BeautifulSoup(page.content, "html.parser")
+        ceo_soup=soup.find("table", class_="W(100%)").get_text("_").split("_")
+        #ceo_table=ceo_soup.find_all("tr", class_="C($primaryColor) BdB Bdc($seperatorColor) H(36px)")
+        print(ceo_soup)
+        print(len(ceo_soup))
+
+        #------
+        #item = soup.select("div span[data-reactid*='$11606747']")[0].text
+        #print(' '.join(item.split()))
+        #print(ceo_)
+        #print(helpfull)
+        #data=helpfull.find_all("td")
+        #print(data)
+
+        #ceo=ceo_soup.find_all("table",class_="W(100%)")
+        #print(ceo)
+        #country = empl.find('p', class_="D(ib) Va(t)").get_text("_").replace(",","").replace(" ","").split("_")[-1].replace(":\xa0","-")
+        #print(country)
+        #ceo_s.append(ceo)
+    return ceo_s
+
 
 
 
@@ -161,11 +188,11 @@ def main():
     create_table()
     get_company_code()
     get_company_name()
-    print(get_page_to_get_country_and_CEO_details())
-    print(get_page_to_get_W52_details())
-    print(get_country())
-    print(get_empl_number())
-
+    #print(get_page_to_get_country_and_CEO_details())
+    #print(get_page_to_get_W52_details())
+    #print(get_country())
+    #print(get_empl_number())
+    get_CEO_name()
 
 if __name__ == "__main__":
     main()
