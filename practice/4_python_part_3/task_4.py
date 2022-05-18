@@ -16,6 +16,7 @@ Example:
 
 import argparse
 from faker import Faker
+from unittest import mock,TestCase
 fake = Faker()
 parser = argparse.ArgumentParser()
 parser.add_argument("-f","--fake",type=int)
@@ -28,6 +29,9 @@ def create_fake(how_many_fake_addresses):
          fake_personal_data["fake_address"]=fake.address()
          print(fake_personal_data)
     return fake_personal_data
+
+
+
 
 
 if __name__=='__main__':

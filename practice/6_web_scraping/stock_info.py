@@ -48,8 +48,7 @@ def get_company_code():
     for company in bs.find_all('a', class_="Fw(600) C($linkColor)"):
         company_code = company.get_text()
         companies.append(company_code)
-        #print(company_code)
-    print(companies)
+    return companies
 
 
 def get_company_name():
@@ -58,7 +57,6 @@ def get_company_name():
     for company in bs.find_all('a', class_="Fw(600) C($linkColor)"):
         company_name = company.get("title")
         companies_names.append(company_name)
-    print(companies_names)
     return companies_names
 
 def get_page_to_get_country_and_CEO_details():
@@ -78,6 +76,17 @@ def get_page_to_get_W52_details():
         company_link_ks ='https://finance.yahoo.com' + "/quote/" + company_code + "/key-statistics?p=" + company_code
         comp_key_statistics.append(company_link_ks)
     return comp_key_statistics
+
+def get_w52_details():
+    ew52_details = list()
+    urls = get_page_to_get_W52_details()
+    for i in urls:
+        page = get(i, headers={'User-Agent': 'PostmanRuntime/7.29.0'})
+        soup = BeautifulSoup(page.content, "html.parser")
+        data=soup.find_all("div", class_="Mstart(a) Mend(a)")
+        data_deeper=data.find("table", class_="W(100%) Bdcl(c)").get_text()
+        print(data_deeper)
+    return ew52_details
 
 def get_country():
     countries=list()
@@ -177,14 +186,23 @@ def create_table():
 
 def main():
     create_table()
-    get_company_code()
-    get_company_name()
+    companies=get_company_code()
+    company_names=get_company_name()
     #print(get_page_to_get_country_and_CEO_details())
     #print(get_page_to_get_W52_details())
-    #print(get_country())
-    #print(get_empl_number())
-    #print(get_CEO_name())
-    print(get_CEO_birthday_year())
+    contries=get_country()
+    employees=get_empl_number()
+    ceos=get_CEO_name()
+    ceo_birthdays=get_CEO_birthday_year()
+    for index,company_name in enumerate(company_names):
+        company_code=companies[index]
+        contry=contries[index]
+        employee_number=employees[index]
+        ceo_name=ceos[index]
+        ceo_birthday_year=ceo_birthdays[index]
+        print(f"|{company_name:40}| {company_code:8}|{contry:20}|{employee_number:16}|{ceo_name:40}|{ceo_birthday_year:16}|")
+
+    #print(f"|{company_name:40}| {company_name:8}|{company_name:20}|{company_name:16}|{company_name:30}|{company_name:16}|")
 
 if __name__ == "__main__":
     main()
