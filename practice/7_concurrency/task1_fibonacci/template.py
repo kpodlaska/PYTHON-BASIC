@@ -38,18 +38,38 @@ def func1(n):
 
         lista=os.listdir(OUTPUT_DIR)
     print(lista)
-
-
     print("end")
+    return lista
 
 
 #def func2(result_file: str):
+def func2():
+    try:
+        result = []
+        lista=os.listdir(OUTPUT_DIR)
+        for f_name in lista:
+            if f_name.endswith('.txt'):
+                result.append(f_name)
+        print(result)
+    except FileNotFoundError():
+        print("nie znaleziono pliku")
+    #print(result)
+    with open(RESULT_FILE,"a") as output_file:
+        for file in result:
+            with open(file) as opened_file:
+                file_name=opened_file.name
+                content=opened_file.readline()
+                print(file_name,content)
+                output_file.write(f"{file_name}, {content}/n")
+
+
 #    print("wywołałem funckję 2")
 
 #for _ in range(10):
 #    threading.Thread(target=func1).start()
 
-func1(10_000)
+#func1(1_000)
+func2()
 
 """
 
