@@ -44,13 +44,23 @@ def func1(n):
 
 #def func2(result_file: str):
 def func2():
-    try:
-        with open(RESULT_FILE,"w") as result:
-            csvwriter = csv.writer(result)
-            for n in range(10):
-                csvwriter.writerow([n,2*n, "siemka"])
-    except FileNotFoundError:
-        pass
+    for f_name in os.listdir(OUTPUT_DIR):
+        try:
+            if f_name.endswith('.txt'):
+                with open(f_name) as opened_file:
+
+                    content=opened_file.readline()
+                with open(RESULT_FILE,"w") as result:
+                    csvwriter = csv.writer(result)
+                    csvwriter.writerow([f_name,content])
+        except FileNotFoundError:
+            print("")
+    with open(RESULT_FILE) as csvfile:
+        readCSV=csv.reader(csvfile,delimiter=",")
+        for row in readCSV:
+            print(row)
+
+
 
 
 
