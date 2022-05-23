@@ -194,15 +194,18 @@ def main():
     employees=get_empl_number()
     ceos=get_CEO_name()
     ceo_birthdays=get_CEO_birthday_year()
-    for index,company_name in enumerate(company_names):
+    counter=[]
+    for index,ceo_birthday in sorted(enumerate(ceo_birthdays),key=lambda x:x[1], reverse=True):
+        how_much=counter.append(index)
         company_code=companies[index]
         contry=contries[index]
         employee_number=employees[index]
         ceo_name=ceos[index]
-        ceo_birthday_year=ceo_birthdays[index]
-        print(f"|{company_name:40}| {company_code:8}|{contry:20}|{employee_number:16}|{ceo_name:40}|{ceo_birthday_year:16}|")
+        company_name=company_names[index]
+        print(f"|{company_name:40}| {company_code:8}|{contry:20}|{employee_number:16}|{ceo_name:40}|{ceo_birthday:16}|")
+        if how_much>5:
+            break
 
-    #print(f"|{company_name:40}| {company_name:8}|{company_name:20}|{company_name:16}|{company_name:30}|{company_name:16}|")
 
 if __name__ == "__main__":
     main()
