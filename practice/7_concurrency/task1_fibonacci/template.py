@@ -1,10 +1,10 @@
 import os
 from random import randint
 import threading
-
+import csv
 
 OUTPUT_DIR: str = '/Users/kpodlaska/Desktop/python/output'
-RESULT_FILE = 'Users/kpodlaska/Desktop/python/output/result.csv'
+RESULT_FILE = './output/result.csv'
 
 
 def fib(n: int):
@@ -45,25 +45,17 @@ def func1(n):
 #def func2(result_file: str):
 def func2():
     try:
-        result = []
-        lista=os.listdir(OUTPUT_DIR)
-        for f_name in lista:
-            if f_name.endswith('.txt'):
-                result.append(f_name)
-        print(result)
-    except FileNotFoundError():
-        print("nie znaleziono pliku")
-    #print(result)
-    with open(RESULT_FILE,"a") as output_file:
-        for file in result:
-            with open(file) as opened_file:
-                file_name=opened_file.name
-                content=opened_file.readline()
-                print(file_name,content)
-                output_file.write(f"{file_name}, {content}/n")
+        with open(RESULT_FILE,"w") as result:
+            csvwriter = csv.writer(result)
+            for n in range(10):
+                csvwriter.writerow([n,2*n, "siemka"])
+    except FileNotFoundError:
+        pass
 
 
-#    print("wywołałem funckję 2")
+
+
+
 
 #for _ in range(10):
 #    threading.Thread(target=func1).start()
