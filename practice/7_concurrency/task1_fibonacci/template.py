@@ -26,14 +26,21 @@ def fib_list(n):
 #def func1(array: list):
 def func1(n):
     fibs=fib_list(n)
+    print(fibs)
     for index,fib in enumerate(fibs):
-        file_name=str(index)+".txt"
-        with open(file_name,"w") as file:
+        file_name = str(index) + ".txt"
+        file_txt = os.path.join(OUTPUT_DIR, file_name)
+
+        print(file_name,file_txt)
+        with open(file_txt,"w") as file:
             file.write(str(fib))
         print(index,fib)
 
+        lista=os.listdir(OUTPUT_DIR)
+    print(lista)
 
-    print("wywołałem funckję 1")
+
+    print("end")
 
 
 #def func2(result_file: str):
@@ -42,7 +49,7 @@ def func1(n):
 #for _ in range(10):
 #    threading.Thread(target=func1).start()
 
-func1(3)
+func1(10_000)
 
 """
 
